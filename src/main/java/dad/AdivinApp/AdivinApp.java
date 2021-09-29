@@ -27,7 +27,7 @@ public class AdivinApp extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		// Generamos n�mero aleatorio.
+		// Generamos número aleatorio.
 		Random rd = new Random();
 		numero = rd.nextInt(100) + 1;
 
@@ -41,13 +41,13 @@ public class AdivinApp extends Application {
 		saludoLabel = new Label();
 		saludoLabel.setText("Introduce un número del 1 al 100.");
 
-		// creamos bot�n
+		// creamos botón
 		saludarButton = new Button();
 		saludarButton.setText("Comprobar");
 		saludarButton.setOnAction(e -> onAdivinar(e));
 		saludarButton.setDefaultButton(true);
 
-		// Panel con disposici�n vertical
+		// Panel con disposición vertical
 		root = new VBox();
 		root.setSpacing(15);
 		root.setAlignment(Pos.CENTER);
