@@ -22,6 +22,7 @@ public class AdivinApp extends Application {
 	private VBox root;
 	private Alert alertInfo, alertWarning, alertError;
 	private int numero;
+	private int intentos;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -38,7 +39,7 @@ public class AdivinApp extends Application {
 
 		// creamos etiqueta
 		saludoLabel = new Label();
-		saludoLabel.setText("Introduce un n�mero del 1 al 100.");
+		saludoLabel.setText("Introduce un número del 1 al 100.");
 
 		// creamos bot�n
 		saludarButton = new Button();
@@ -65,7 +66,7 @@ public class AdivinApp extends Application {
 	private void onAdivinar(ActionEvent e) {
 		String cadena = nombreText.getText();
 		int numPrueba;
-
+		
 		try {
 			numPrueba = Integer.parseInt(cadena);
 
@@ -73,7 +74,7 @@ public class AdivinApp extends Application {
 				alertError = new Alert(AlertType.ERROR);
 				alertError.setTitle("AdivinApp");
 				alertError.setHeaderText("ERROR");
-				alertError.setContentText("El n�mero introducido no es v�lido, debe estar entre 1 y 100.");
+				alertError.setContentText("El número introducido no es válido, debe estar entre 1 y 100.");
 				alertError.showAndWait();
 				nombreText.clear();
 			} else {
@@ -81,9 +82,10 @@ public class AdivinApp extends Application {
 				if (numPrueba < numero) {
 					alertWarning = new Alert(AlertType.WARNING);
 					alertWarning.setTitle("AdivinApp");
-					alertWarning.setHeaderText("�Has fallado!");
+					alertWarning.setHeaderText("¡Has fallado!");
 					alertWarning.setContentText(
-							"El n�mero a adivinar es mayor que " + numPrueba + "." + "\n" + "Vuelve a intentarlo.");
+							"El número a adivinar es mayor que " + numPrueba + "." + "\n" + "Vuelve a intentarlo.");
+					intentos++;
 					alertWarning.showAndWait();
 					nombreText.clear();
 				}
@@ -91,9 +93,10 @@ public class AdivinApp extends Application {
 				if (numPrueba == numero) {
 					alertInfo = new Alert(AlertType.INFORMATION);
 					alertInfo.setTitle("AdiviApp");
-					alertInfo.setHeaderText("�Has ganado!");
-					alertInfo.setContentText("Solo has necesitado x intentos!");
-					alertInfo.setContentText("Vuelve a jugar y hazlo mejor!");
+					alertInfo.setHeaderText("¡Has ganado!");
+					alertInfo.setContentText("");
+					alertInfo.setContentText("Vuelve a jugar y hazlo mejor!" + "\n" 
+					+"Solo has necesitado" + intentos + " intentos!");
 					Random rd = new Random();
 					numero = rd.nextInt(100) + 1;
 
@@ -104,9 +107,10 @@ public class AdivinApp extends Application {
 				if (numPrueba > numero) {
 					alertWarning = new Alert(AlertType.WARNING);
 					alertWarning.setTitle("AdivinApp");
-					alertWarning.setHeaderText("�Has fallado!");
+					alertWarning.setHeaderText("¡Has fallado!");
 					alertWarning.setContentText(
-							"El n�mero a adivinar es menor que " + numPrueba + "." + "\n" + "Vuelve a intentarlo.");
+							"El número a adivinar es menor que " + numPrueba + "." + "\n" + "Vuelve a intentarlo.");
+					intentos++;
 					alertWarning.showAndWait();
 					nombreText.clear();
 				}
@@ -116,7 +120,7 @@ public class AdivinApp extends Application {
 			alertError.setTitle("AdivinApp");
 			alertError.setHeaderText("ERROR");
 			alertError
-					.setContentText("Ha introducido letras, car�cteres inv�lidos o ha dejado el campo de texto vac�o.");
+					.setContentText("Ha introducido letras, carácteres inválidos o ha dejado el campo de texto vacío.");
 			alertError.showAndWait();
 			nombreText.clear();
 		}
